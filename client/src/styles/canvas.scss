@@ -1,0 +1,15 @@
+@import './variables';
+
+.canvas {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    overflow: auto;
+    margin: 50px 0;
+}
+
+canvas {
+    border: 1px solid black;
+    background-color: #fff;
+    margin: 0 auto;
+}
