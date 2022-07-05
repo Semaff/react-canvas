@@ -51,13 +51,15 @@ export default class Circle extends Tool {
     draw(x, y, r) {
         const img = new Image()
         img.src = this.savedImg
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-        this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height)
+        img.onload = () => {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+            this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height)
 
-        this.ctx.beginPath()
-        this.ctx.arc(x, y, r, 0, 2 * Math.PI)
-        this.ctx.fill()
-        this.ctx.stroke()
+            this.ctx.beginPath()
+            this.ctx.arc(x, y, r, 0, 2 * Math.PI)
+            this.ctx.fill()
+            this.ctx.stroke()
+        }
     }
 
     static serverDraw(ctx, x, y, r, fillColor, strokeColor, lineWidth) {

@@ -49,17 +49,18 @@ export default class Triangle extends Tool {
     draw(x, y, curX, curY) {
         const img = new Image();
         img.src = this.savedImg;
+        img.onload = () => {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
 
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
-
-        this.ctx.beginPath();
-        this.ctx.moveTo(x, y);
-        this.ctx.lineTo(curX, curY);
-        this.ctx.lineTo(x + (x - curX), curY);
-        this.ctx.closePath();
-        this.ctx.stroke();
-        this.ctx.fill();
+            this.ctx.beginPath();
+            this.ctx.moveTo(x, y);
+            this.ctx.lineTo(curX, curY);
+            this.ctx.lineTo(x + (x - curX), curY);
+            this.ctx.closePath();
+            this.ctx.stroke();
+            this.ctx.fill();
+        }
     }
 
     static serverDraw(ctx, x, y, curX, curY, fillColor, strokeColor, lineWidth) {

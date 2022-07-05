@@ -21,12 +21,12 @@ const Canvas = observer(() => {
             .then(response => {
                 const img = new Image();
                 img.src = response.data;
-                // img.onload = () => {}
-
                 // * REDRAW
-                ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-                ctx.drawImage(img, 0, 0, canvasRef.current.width, canvasRef.current.height);
-                ctx.stroke();
+                img.onload = () => {
+                    ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+                    ctx.drawImage(img, 0, 0, canvasRef.current.width, canvasRef.current.height);
+                    ctx.stroke();
+                }
             }).catch(err => {
                 ctx.fillStyle = "white";
                 ctx.fillRect(0, 0, canvasState.canvas.width, canvasState.canvas.height);
