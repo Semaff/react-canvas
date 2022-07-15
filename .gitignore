@@ -12,6 +12,7 @@ server/coverage
 client/build
 server/build
 server/files
+server/public
 
 # misc
 client/.env
