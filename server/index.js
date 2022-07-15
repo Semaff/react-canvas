@@ -7,7 +7,7 @@ const express = require('express');
 const expressWS = require('express-ws');
 const cors = require('cors');
 const router = require('./routes/routes');
-const errorHandler = require('./middleware/ErrorHandlingMiddleware');
+const errorHandler = require('./middleware/errorHandlingMiddleware');
 
 /*
   Config
