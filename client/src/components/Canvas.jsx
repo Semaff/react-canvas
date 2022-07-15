@@ -37,7 +37,7 @@ const Canvas = observer(() => {
     // Check Connection / Draw canvas
     useEffect(() => {
         if (canvasState.username) {
-            const socket = new WebSocket('ws://localhost:5000/');
+            const socket = new WebSocket('ws://localhost:5000/draw');
             canvasState.setSocket(socket);
             canvasState.setSessionID(params.id);
             toolState.setTool(new Brush(canvasRef.current, socket, params.id));
