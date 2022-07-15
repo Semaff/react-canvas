@@ -4,7 +4,7 @@
 require('dotenv').config();
 const findRemoveSync = require("find-remove");
 const express = require('express');
-const epressWS = require('express-ws');
+const expressWS = require('express-ws');
 const cors = require('cors');
 const router = require('./routes/routes');
 const errorHandler = require('./middleware/ErrorHandlingMiddleware');
@@ -14,9 +14,10 @@ const errorHandler = require('./middleware/ErrorHandlingMiddleware');
 */
 const PORT = process.env.PORT || 5000;
 const app = express();
-const WSServer = epressWS(app);
+const WSServer = expressWS(app);
 const aWss = WSServer.getWss();
 
+app.use(express.static("public"));
 app.use(cors());
 app.use(express.json());
 app.use(router);
@@ -28,6 +29,9 @@ app.use(errorHandler);
  Start Server
 */
 app.listen(PORT, () => console.log(`Server started on PORT ${PORT}`));
+app.get("/:id", (req, res) => {
+    res.sendFile(__dirname + "/public/index.html");
+});
 
 // Delete files older than 24 hours
 findRemoveSync(__dirname + '/files', { age: { seconds: 86400 } });
@@ -35,7 +39,7 @@ findRemoveSync(__dirname + '/files', { age: { seconds: 86400 } });
 /*
   WebSocket
 */
-app.ws('/', (ws, req) => {
+app.ws('/draw', (ws, req) => {
     ws.on('message', (msg) => {
         msg = JSON.parse(msg);
         switch (msg.method) {
