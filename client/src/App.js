@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Canvas, Modal, Notify, SettingBar, Toolbar } from './components';
+import ShareLink from './components/ShareLink';
 import canvasState from './store/canvasState';
 import "./styles/app.scss";
 
@@ -12,8 +13,10 @@ function App() {
 
     // New User
     const connectHandler = () => {
-        canvasState.setUsername(usernameRef.current.value);
-        setShowModal(false);
+        if(usernameRef.current.value.length > 0) {
+            canvasState.setUsername(usernameRef.current.value);
+            setShowModal(false);
+        }
     }
 
     // Handle CTRL + Z and CTRL + Y
@@ -50,6 +53,8 @@ function App() {
                 connectHandler={connectHandler}
                 usernameRef={usernameRef}
             />
+
+            <ShareLink />
         </div>
     )
 }
